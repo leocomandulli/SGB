@@ -1,7 +1,6 @@
 import sqlite3
 import streamlit as st
 import pandas as pd
-import streamlit_authenticator as stauth
 from streamlit_option_menu import option_menu
 
 # ----- Importação das páginas ------
