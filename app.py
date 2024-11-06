@@ -31,7 +31,7 @@ class MultiApp:
             app = option_menu(
                 menu_title='Painel TCP',
                 options=['Home', 'Dashboard', 'Busca família', 'Ultimos Registros' ],
-                icons=['house-fill', 'graph-up', 'search', 'clock-fill'],
+                icons=['house-fill', 'graph-up', 'search', 'clock'],
                 menu_icon='list',
                 default_index=1,
                 styles={
