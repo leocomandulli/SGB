@@ -19,11 +19,12 @@ def app():
     Além dessas funcionalidades, o TCP automatiza várias tarefas, como a atualização de planilhas de controle, envio de mensagens e armazenamento de dados de uso em um banco de dados.'''
     st.markdown(texto_sobre)
 
+
+    # ----- Resmuo de status -----
+    st.subheader("Resumo de status:")
+
     # Verificar se a contagem de famílias está no session_state
-
     contagem_familias = st.session_state['contagem_familias']
-
-
     st.dataframe(contagem_familias, use_container_width=True)
 
 

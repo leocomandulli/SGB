@@ -5,10 +5,11 @@ import streamlit_authenticator as stauth
 from streamlit_option_menu import option_menu
 
 # ----- Importação das páginas ------
-import Dash
+import Biblioteca
 import Home
 import Search
 import ultimos_registros
+import Dashboard
 
 # ------ Configuração da página ------
 
@@ -30,8 +31,8 @@ class MultiApp:
         with st.sidebar:
             app = option_menu(
                 menu_title='Painel TCP',
-                options=['Home', 'Dashboard', 'Busca família', 'Ultimos Registros' ],
-                icons=['house-fill', 'graph-up', 'search', 'clock'],
+                options=['Home', 'Biblioteca', 'Busca família', 'Ultimos Registros', 'Dashboard' ],
+                icons=['house-fill', 'book', 'search', 'clock', 'graph-up'],
                 menu_icon='list',
                 default_index=1,
                 styles={
@@ -44,12 +45,14 @@ class MultiApp:
 
         if app == "Home":
             Home.app()
-        elif app == "Dashboard":
-            Dash.app()
+        elif app == "Biblioteca":
+            Biblioteca.app()
         elif app == "Busca família":
             Search.app()
         elif app == "Ultimos Registros":
             ultimos_registros.app()
+        elif app == "Dashboard":
+            Dashboard.app()
 
 
 # ------ Execução da aplicação ------

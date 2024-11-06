@@ -92,6 +92,7 @@ def app():
     # Armazenar no session_state para usar em outras páginas
     st.session_state['contagem_familias'] = contagem
 
-    # ----- Definição da tabela de últimas modificadas -----
-
-    
+    # ----- Resmuo de status -----
+    st.subheader("Resumo de status:")
+    contagem_familias = st.session_state['contagem_familias']
+    st.dataframe(contagem_familias, use_container_width=True)
