@@ -42,6 +42,7 @@ def app():
             elaborador = results.iloc[0]['Elaborador']
             status_biblioteca = results.iloc[0]['Status_Biblioteca']
             ultima_atualizacao = results.iloc[0]['Ultima_Atualizacao']
+            descricao = results.iloc[0]['Descricao']
             File_Path = results.iloc[0]['File_Path']
 
             # Verifica se File_Path não é None antes de construir o caminho
@@ -51,7 +52,10 @@ def app():
                 Caminho_Arquivo = None
 
             # Exibir as informações
-            st.subheader("Família encontrada")
+            st.markdown(f"""
+                        ## {familia_procurada}
+
+                        """)
 
             # Configura colunas para exibir a imagem e o texto lado a lado
             col1, col2 = st.columns([1, 2])  # Ajusta o tamanho das colunas, se necessário
@@ -64,10 +68,13 @@ def app():
                     st.write("Imagem não encontrada")
 
             with col2:
-                st.write(f"Família procurada: {familia_procurada}")
-                st.write(f"Elaborador: {elaborador}")
-                st.write(f"Status na biblioteca: {status_biblioteca}")
-                st.write(f"Última atualização: {ultima_atualizacao}")
+                st.markdown(f"""
+                **Descrição:** {descricao}  
+                **Elaborador:** {elaborador}  
+                **Status na Biblioteca:** {status_biblioteca}  
+                **Última Atualização:** {ultima_atualizacao}  
+                """)
+
 
                 if Caminho_Arquivo:
                     with open(Caminho_Arquivo, "rb") as file:

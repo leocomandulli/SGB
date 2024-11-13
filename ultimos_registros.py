@@ -5,14 +5,13 @@ import base64
 import os
 from PIL import Image
 
-
 def app():
-    # Função para buscar e exibir uma imagem correspondente
+    # Função para buscar e exibir uma imagem correspondente, se existir no banco de dados de imagens
     def exibir_imagem(nome_familia):
         # Caminho do arquivo de imagem
         caminho_imagem = f"images/{nome_familia}.png"
         
-        # Verifica se a imagem existe
+        # Verifica se a imagem existe na pasta 'images'
         if os.path.exists(caminho_imagem):
             # Carrega e exibe a imagem
             imagem = Image.open(caminho_imagem)
@@ -33,7 +32,8 @@ def app():
                 return "Sem permissão"
         else:
             # Mensagem caso o arquivo não exista
-            return "Arquivo insdisponível"
+            return "Arquivo indisponível"
+    
     # ----- Tabela de Últimos Registros -----
 
     # Conectar ao banco de dados SQLite
@@ -46,9 +46,12 @@ def app():
     # Fechar a conexão após carregar os dados
     conn.close()
 
-     # Remover registros onde Codigo_Pre_Mat é 'none' ou None
+    # Remover registros onde Codigo_Pre_Mat é 'none' ou None
     df_extrato = df_extrato[(df_extrato['Codigo_Pre_Mat'].notna()) & (df_extrato['Codigo_Pre_Mat'] != "None")]
 
+    # Filtrar registros que têm uma imagem correspondente
+    df_extrato['Tem_Imagem'] = df_extrato['Codigo_Pre_Mat'].apply(lambda x: os.path.exists(f"images/{x}.png"))
+    df_extrato = df_extrato[df_extrato['Tem_Imagem']]
 
     # Remover registros duplicados, mantendo apenas o último inserido
     df_extrato = df_extrato.drop_duplicates(subset='Codigo_Pre_Mat', keep='last')
@@ -58,7 +61,7 @@ def app():
 
     # ----- Exibição dos Últimos Registros em Três Colunas -----
 
-    st.subheader("Últimos Registros da Tabela Extrato_Dynamo:")
+    st.subheader("Últimas atualizações:")
 
     # Configuração das colunas para exibir as informações
     for _, row in df_ultimos_registros.iterrows():
@@ -86,7 +89,7 @@ def app():
 
         # Botão de Download para o File_Path na coluna 4
         with col4:
-        # Exibe o botão de download somente se o arquivo estiver disponível
             st.markdown(gerar_botao_download(row['File_Path']), unsafe_allow_html=True)
+        
         # Linha divisória entre registros
         st.markdown("---")

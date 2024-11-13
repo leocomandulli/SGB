@@ -30,11 +30,11 @@ class MultiApp:
     def run(self):
         with st.sidebar:
             app = option_menu(
-                menu_title='Painel TCP',
+                menu_title='Painel SGB',
                 options=['Home', 'Biblioteca', 'Busca família', 'Ultimos Registros', 'Dashboard' ],
                 icons=['house-fill', 'book', 'search', 'clock', 'graph-up'],
                 menu_icon='list',
-                default_index=1,
+                default_index=0,
                 styles={
                     "container": {"padding": "5!important", "background-color": 'white'},
                     "icon": {"color": "black", "font-size": "20px"},

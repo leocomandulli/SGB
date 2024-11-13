@@ -4,7 +4,7 @@ import pandas as pd
 
 def app():
 
-    st.header("Dashboard")
+    st.header("DashBoard")
     texto = '''
     Em construção...'''
     st.markdown(texto)

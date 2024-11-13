@@ -93,6 +93,6 @@ def app():
     st.session_state['contagem_familias'] = contagem
 
     # ----- Resmuo de status -----
-    st.subheader("Resumo de status:")
+    st.sidebar.subheader("Resumo de status:")
     contagem_familias = st.session_state['contagem_familias']
-    st.dataframe(contagem_familias, use_container_width=True)
+    st.sidebar.dataframe(contagem_familias, use_container_width=True)
